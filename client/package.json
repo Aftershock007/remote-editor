@@ -11,12 +11,17 @@
   },
   "dependencies": {
     "@monaco-editor/react": "^4.6.0",
+    "axios": "^1.7.2",
+    "monaco-themes": "^0.4.4",
+    "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-avatar": "^5.0.3",
     "react-dom": "^18.2.0",
     "react-hot": "^0.0.1",
     "react-hot-toast": "^2.4.1",
     "react-router-dom": "^6.23.1",
+    "react-select": "^5.8.0",
+    "react-toastify": "^10.0.5",
     "socket.io-client": "^4.7.5",
     "toast": "^0.5.4",
     "uuid": "^10.0.0"
