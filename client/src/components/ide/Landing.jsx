@@ -13,6 +13,7 @@ import CustomInput from "./CustomInput"
 import OutputDetails from "./OutputDetails"
 import ThemeDropdown from "./ThemeDropdown"
 import LanguagesDropdown from "./LanguagesDropdown"
+import { useDebouncedCallback } from "use-debounce"
 
 export default function Landing({ roomId, socketRef }) {
   const [code, setCode] = useState("")
@@ -102,16 +103,14 @@ export default function Landing({ roomId, socketRef }) {
         console.log("status", status)
         if (status === 429) {
           console.log("too many requests", status)
-
-          showErrorToast(
-            `Quota of 100 requests exceeded for the Day! Please read the blog on freeCodeCamp to learn how to setup your own RAPID API Judge0!`,
-            10000
-          )
+          showErrorToast(`Quota of 100 requests exceeded for the Day!`, 1000)
         }
         setProcessing(false)
         console.log("catch block...", error)
       })
   }, [checkStatus, code, customInput, language.id])
+
+  const debouncedHandleCompile = useDebouncedCallback(handleCompile, 500)
 
   useEffect(() => {
     if (enterPress && ctrlPress) {
@@ -203,8 +202,18 @@ export default function Landing({ roomId, socketRef }) {
             />
           </div>
           <OutputWindow outputDetails={outputDetails} />
-          <button
+          {/* <button
             onClick={handleCompile}
+            disabled={!code}
+            className={classnames(
+              "mt-4 border-2 border-black z-10 rounded-md shadow-[5px_5px_0px_0px_rgba(0,0,0)] px-4 py-2 hover:shadow transition duration-200 bg-white flex-shrink-0",
+              !code ? "opacity-50" : ""
+            )}
+          >
+            {processing ? "Processing..." : "Compile and Execute"}
+          </button> */}
+          <button
+            onClick={debouncedHandleCompile}
             disabled={!code}
             className={classnames(
               "mt-4 border-2 border-black z-10 rounded-md shadow-[5px_5px_0px_0px_rgba(0,0,0)] px-4 py-2 hover:shadow transition duration-200 bg-white flex-shrink-0",
