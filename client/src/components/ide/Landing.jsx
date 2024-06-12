@@ -61,7 +61,6 @@ export default function Landing({ roomId, socketRef }) {
         setProcessing(false)
         setOutputDetails(response.data)
         showSuccessToast(`Compiled Successfully!`)
-        console.log("response.data", response.data)
         return
       }
     } catch (err) {
@@ -94,7 +93,6 @@ export default function Landing({ roomId, socketRef }) {
     axios
       .request(options)
       .then(function (response) {
-        console.log("res.data", response.data)
         const token = response.data.token
         checkStatus(token)
       })
@@ -200,6 +198,8 @@ export default function Landing({ roomId, socketRef }) {
             <CustomInput
               customInput={customInput}
               setCustomInput={setCustomInput}
+              roomId={roomId}
+              socketRef={socketRef}
             />
           </div>
           <OutputWindow outputDetails={outputDetails} />

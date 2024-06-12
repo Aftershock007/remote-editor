@@ -20,7 +20,7 @@ export default function OutputWindow({ outputDetails }) {
     } else if (statusId === 5) {
       return (
         <pre className="px-2 py-1 font-normal text-xs text-red-500">
-          {`Time Limit Exceeded`}
+          Time Limit Exceeded
         </pre>
       )
     } else {

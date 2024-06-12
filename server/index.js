@@ -40,6 +40,13 @@ io.on("connection", (socket) => {
     io.to(socketId).emit(ACTIONS.CODE_CHANGE, { code })
   })
 
+  socket.on(ACTIONS.INPUT_CHANGE, ({ roomId, input }) => {
+    socket.in(roomId).emit(ACTIONS.INPUT_CHANGE, { input })
+  })
+  socket.on(ACTIONS.SYNC_INPUT, ({ socketId, input }) => {
+    io.to(socketId).emit(ACTIONS.INPUT_CHANGE, { input })
+  })
+
   socket.on("disconnecting", () => {
     const rooms = [...socket.rooms]
     rooms.forEach((roomId) => {

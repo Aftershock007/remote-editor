@@ -34,7 +34,3 @@ OutputDetails.propTypes = {
     time: PropTypes.string
   })
 }
-
-OutputDetails.defaultProps = {
-  outputDetails: null
-}
